@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Spam Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+    <div class="background-gradient"></div>
+    
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1 class="logo">Spam Detector</h1>
+        </div>
+        <div class="nav-user">
+            <span class="username">{{ username }}</span>
+            <form method="POST" action="{{ url_for('logout') }}" style="display: inline;">
+                <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+            </form>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="dashboard-grid">
+            <!-- Main Scanner Card -->
+            <div class="card main-card floating-card">
+                <div class="card-header">
+                    <h2>Spam Detection Scanner</h2>
+                    <p class="subtitle">Enter a message to check if it's spam</p>
+                </div>
+                
+                <!-- Description Section -->
+                <div class="description-section">
+                    <h3>How It Works</h3>
+                    <p>Our Spam Detector uses advanced AI technology to analyze messages and identify spam content. Simply paste or type any message (email, SMS, or chat) into the text box below, and our dual-model system will instantly analyze it using:</p>
+                    <ul>
+                        <li><strong>TF-IDF Vectorization:</strong> Advanced text analysis that weights important words and phrases</li>
+                        <li><strong>LinearSVM Model:</strong> Machine learning classifier trained on balanced dataset</li>
+                        <li><strong>N-gram Analysis:</strong> Detects spam patterns using both single words and word pairs</li>
+                    </ul>
+                    
+                    <h3>Uses & Applications</h3>
+                    <ul>
+                        <li>✅ <strong>Email Protection:</strong> Detect phishing emails and spam messages before they reach your inbox</li>
+                        <li>✅ <strong>SMS Filtering:</strong> Identify spam text messages and promotional scams</li>
+                        <li>✅ <strong>Chat Security:</strong> Protect yourself from malicious links and suspicious messages</li>
+                        <li>✅ <strong>Content Moderation:</strong> Filter unwanted content in messaging platforms</li>
+                        <li>✅ <strong>Personal Safety:</strong> Avoid clicking on dangerous links or falling for scams</li>
+                        <li>✅ <strong>Business Use:</strong> Protect your organization from spam and phishing attacks</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="messageInput">Message Content</label>
+                    <textarea 
+                        id="messageInput" 
+                        rows="6" 
+                        placeholder="Paste or type a message here..."
+                    ></textarea>
+                </div>
+                
+                <button id="scanBtn" class="btn btn-primary btn-large">
+                    <span class="btn-text">Scan for Spam</span>
+                    <span class="btn-loader hidden"></span>
+                </button>
+                
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section hidden">
+                    <div class="results-grid">
+                        <div class="result-card" style="grid-column: 1 / -1;">
+                            
+                            <div id="classicalResult" class="result-badge">
+                                <span class="result-text">-</span>
+                            </div>
+                            <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                
+                        </div>
+                    </div>
+                    
+                    <div id="agreementMessage" class="agreement-message" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <!-- Stats Card -->
+            <div class="card stats-card floating-card">
+                <div class="card-header">
+                    <h2>Session Statistics</h2>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalScans">0</div>
+                        <div class="stat-label">Total Scans</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value spam-count" id="spamCount">0</div>
+                        <div class="stat-label">Spam Detected</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-value ham-count" id="hamCount">0</div>
+                        <div class="stat-label">Safe Messages</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
